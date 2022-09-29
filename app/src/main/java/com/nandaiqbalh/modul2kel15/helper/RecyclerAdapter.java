@@ -3,6 +3,7 @@ package com.nandaiqbalh.modul2kel15.helper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,15 +41,27 @@ public class RecyclerAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
         viewHolder.tvFirstName.setText(dataUser.get(i).getFirstName());
         viewHolder.tvLastName.setText(dataUser.get(i).getLastName());
-        viewHolder.tvEmail.setText(String.format("Email : %s",
-                dataUser.get(i).getEmail()));
+        viewHolder.tvEmail.setText(String.format("Email : %s", dataUser.get(i).getEmail()));
 
         Glide.with(mContext).load(dataUser.get(i).getAvatar()).into(viewHolder.imgPhotoUser);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra("name", dataUser.get(i).getFirstName());
+
+                // creating a bundle object
+                Bundle bundleUser = new Bundle();
+
+                // storing the string value in the bundle
+                // which is mapped to key
+                bundleUser.putString("avatar", dataUser.get(i).getAvatar());
+                bundleUser.putString("first_name", dataUser.get(i).getFirstName());
+                bundleUser.putString("last_name", dataUser.get(i).getLastName());
+                bundleUser.putString("email", dataUser.get(i).getEmail());
+
+                // passing the bundle into the intent
+                intent.putExtras(bundleUser);
+
                 mContext.startActivity(intent);
             }
         });
