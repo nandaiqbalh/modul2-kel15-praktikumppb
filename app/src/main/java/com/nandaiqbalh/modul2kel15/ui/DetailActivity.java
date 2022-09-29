@@ -15,6 +15,8 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tvNameDetail, tvEmailDetail;
 
     private Bundle bundle;
+
+    private String firstName, lastName, fullName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,10 @@ public class DetailActivity extends AppCompatActivity {
 
         // display user
         displayUser();
+
+        // set toolbar
+        setMyToolbar();
+
     }
 
     private void initView(){
@@ -45,12 +51,26 @@ public class DetailActivity extends AppCompatActivity {
         Glide.with(this).load(bundle.getString("avatar")).into(ivUserDetail);
 
         // user string value
-        String firstName = bundle.getString("first_name");
-        String lastName = bundle.getString("last_name");
+        firstName = bundle.getString("first_name");
+        lastName = bundle.getString("last_name");
 
-        String fullName = firstName + " " + lastName;
+        fullName = firstName + " " + lastName;
         tvNameDetail.setText(fullName);
 
         tvEmailDetail.setText(bundle.getString("email"));
     }
+
+    private void setMyToolbar(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(fullName);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
+
 }
