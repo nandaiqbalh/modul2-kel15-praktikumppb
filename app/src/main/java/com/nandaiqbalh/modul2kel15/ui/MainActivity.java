@@ -32,23 +32,19 @@ public class MainActivity extends AppCompatActivity {
         rvListUser = findViewById(R.id.rv_list_user);
         ApiClient.getService().getList().enqueue(new Callback<ListUserResponse>() {
             @Override
-            public void onResponse(Call<ListUserResponse> call,
-                                   Response<ListUserResponse> response) {
+            public void onResponse(Call<ListUserResponse> call, Response<ListUserResponse> response) {
+
                 if (response.isSuccessful()) {
                     listItem = response.body().getData();
-                    adapter = new RecyclerAdapter(listItem,
-                            MainActivity.this);
-                    rvListUser.setLayoutManager(new
-                            LinearLayoutManager(getApplicationContext()));
+                    adapter = new RecyclerAdapter(listItem, MainActivity.this);
+                    rvListUser.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     rvListUser.setAdapter(adapter);
                 }
             }
 
             @Override
-            public void onFailure(Call<ListUserResponse> call, Throwable
-                    t) {
-                Toast.makeText(getApplicationContext(), (CharSequence)
-                        t, Toast.LENGTH_LONG).show();
+            public void onFailure(Call<ListUserResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), (CharSequence) t, Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -56,19 +56,19 @@ public class LandingPageActivity extends AppCompatActivity {
             setStatusBarGradiant(this);
         }
         setContentView(R.layout.activity_landing_page);
-        layoutOnboardingIndicators =
-                findViewById(R.id.layoutOnboardingIndicators);
-        buttonOnboardingAction =
-                findViewById(R.id.buttonOnboardingAction);
+
+        layoutOnboardingIndicators = findViewById(R.id.layoutOnboardingIndicators);
+        buttonOnboardingAction = findViewById(R.id.buttonOnboardingAction);
 
         buttonOnboardingAction.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_btn_blue));
         tv_lewati = findViewById(R.id.tv_lewati);
         setupOnboardingItems();
-        final ViewPager2 onboardingViewPager =
-                findViewById(R.id.onboardingViewPager);
+
+        final ViewPager2 onboardingViewPager = findViewById(R.id.onboardingViewPager);
         onboardingViewPager.setAdapter(onboardingAdapter);
         setupOnboardingIndicators();
         setCurrentOnboardingIndicator(0);
+
         onboardingViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -88,6 +88,7 @@ public class LandingPageActivity extends AppCompatActivity {
                 }
             }
         });
+
         buttonOnboardingAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +116,7 @@ public class LandingPageActivity extends AppCompatActivity {
         OnboardingItem landingpage3 = new OnboardingItem();
         landingpage3.setDescription("Materi yang dipelajari mulai dari Styling Android hingga Get Data dari REST API Menggunakan Retrofit");
         landingpage3.setImage(R.drawable.ic_logo);
+
         onboardingItems.add(landingpage1);
         onboardingItems.add(landingpage2);
         onboardingItems.add(landingpage3);
@@ -141,22 +143,22 @@ public class LandingPageActivity extends AppCompatActivity {
 
     private void setCurrentOnboardingIndicator(int index) {
         int childCount = layoutOnboardingIndicators.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            ImageView imageView = (ImageView)
-                    layoutOnboardingIndicators.getChildAt(i);
-            if (i == index) {
 
+        for (int i = 0; i < childCount; i++) {
+            ImageView imageView = (ImageView) layoutOnboardingIndicators.getChildAt(i);
+            if (i == index) {
                 imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.onboarding_indicator_active));
             } else {
-
                 imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.onboarding_indicator_inactive));
             }
         }
+
         if (index == onboardingAdapter.getItemCount() - 1) {
             buttonOnboardingAction.setText(R.string.mulai);
         } else {
             buttonOnboardingAction.setText(R.string.berikutnya);
         }
+
         if (index == onboardingAdapter.getItemCount() - 3) {
             tv_lewati.setText("Lewati");
             tv_lewati.setBackground(null);

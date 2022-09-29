@@ -47,8 +47,7 @@ public class RecyclerAdapter extends
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext,
-                        DetailActivity.class);
+                Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra("name", dataUser.get(i).getFirstName());
                 mContext.startActivity(intent);
             }

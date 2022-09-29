@@ -24,15 +24,11 @@ public class SplashScreenActivity extends AppCompatActivity {
     public static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
-            Drawable background =
-                    activity.getResources().getDrawable(R.drawable.bg_header_home);
+            Drawable background = activity.getResources().getDrawable(R.drawable.bg_header_home);
 
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
             window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-
-            window.setNavigationBarColor(activity.getResources().getColor(android.R.
-                    color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
             window.setBackgroundDrawable(background);
         }
     }
@@ -44,37 +40,44 @@ public class SplashScreenActivity extends AppCompatActivity {
             setStatusBarGradiant(this);
         }
         setContentView(R.layout.activity_splash_screen);
-        final SharedPreferences preferences =
-                getSharedPreferences("PREFERENCE", MODE_PRIVATE);
-        String FirstTime = preferences.getString("FirstTimeInstall",
-                "");
+
+        // init shared preferences
+        final SharedPreferences preferences = getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+        String FirstTime = preferences.getString("FirstTimeInstall", ""); // get shared preference value by key
+
+        // check apakah user pertama kali membuka aplikasi? jika tidak maka..
         if (FirstTime.equals("No")) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+
+                    // jika ini tidak pertama kali user buka aplikasi, maka akan langsung masuk ke main activity
                     Intent intro = new Intent(SplashScreenActivity.this, MainActivity.class);
                     startActivity(intro);
                     finish();
                     overridePendingTransition(0, 0);
-
                     getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                 }
             }, waktu_loading);
+
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    SharedPreferences.Editor editor =
-                            preferences.edit();
+
+                    // save user preferences (sudah pernah melewati on boarding)
+                    SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("FirstTimeInstall", "No");
                     editor.apply();
-                    Intent login = new Intent(SplashScreenActivity.this,
-                            LandingPageActivity.class);
+
+                    // go to main activity
+                    Intent login = new Intent(SplashScreenActivity.this, LandingPageActivity.class);
                     startActivity(login);
                     finish();
                     overridePendingTransition(0, 0);
-
                     getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
                 }
             }, waktu_loading);
         }

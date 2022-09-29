@@ -25,8 +25,7 @@ public class OnboardingAdapter  extends RecyclerView.Adapter<OnboardingAdapter.O
     @NonNull
     @Override
     public OnboardingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new OnboardingViewHolder(
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_container_onboarding, parent, false)
+        return new OnboardingViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_container_onboarding, parent, false)
         );
     }
 
