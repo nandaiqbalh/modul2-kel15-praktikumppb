@@ -48,5 +48,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_detail" />
 
+    <Button
+        android:id="@+id/btn_tentang_kami_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="50dp"
+        style="@style/ButtonStyle"
+        android:text="Tentang Kami"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email_detail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

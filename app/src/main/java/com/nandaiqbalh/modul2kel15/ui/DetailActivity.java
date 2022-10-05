@@ -2,7 +2,10 @@ package com.nandaiqbalh.modul2kel15.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +17,7 @@ public class DetailActivity extends AppCompatActivity {
     private ImageView ivUserDetail;
     private TextView tvNameDetail, tvEmailDetail;
 
+    private Button btnTentangKami;
     private Bundle bundle;
 
     private String firstName, lastName, fullName;
@@ -31,12 +35,28 @@ public class DetailActivity extends AppCompatActivity {
         // set toolbar
         setMyToolbar();
 
+        // button triggered
+        mainButton();
+
     }
 
     private void initView(){
         ivUserDetail =(ImageView) findViewById(R.id.iv_user_detail);
         tvNameDetail = (TextView) findViewById(R.id.tv_name_detail);
         tvEmailDetail = (TextView) findViewById(R.id.tv_email_detail);
+
+        btnTentangKami = (Button) findViewById(R.id.btn_tentang_kami_detail);
+    }
+
+    private void mainButton(){
+
+        btnTentangKami.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivity.this, AboutActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getUserData(){
